@@ -28,6 +28,8 @@ namespace NoteAppUI
             list.Add(note1);
             Project project = new Project(list);
             label6.Text = project.ToString();
+            ProjectManager.SaveToFile(project);
+            ProjectManager.LoadFromFile();
         }
     }
 }
