@@ -56,7 +56,6 @@
             // ButtonOK
             // 
             this.ButtonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.ButtonOK.Location = new System.Drawing.Point(596, 510);
             this.ButtonOK.Name = "ButtonOK";
             this.ButtonOK.Size = new System.Drawing.Size(82, 30);
@@ -151,6 +150,7 @@
             // TextBoxText
             // 
             this.TextBoxText.Location = new System.Drawing.Point(16, 121);
+            this.TextBoxText.MaxLength = 50000;
             this.TextBoxText.Multiline = true;
             this.TextBoxText.Name = "TextBoxText";
             this.TextBoxText.Size = new System.Drawing.Size(750, 383);

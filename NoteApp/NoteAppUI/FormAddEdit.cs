@@ -32,8 +32,16 @@ namespace NoteAppUI
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            Close();
+            if(ComboBoxCategory.SelectedIndex != -1)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            else
+            {
+                ComboBoxCategory.BackColor = Color.Red;
+                MessageBox.Show("Невыбрана категория заметки","Внимание",MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+            }
         }
 
         private void TextBoxText_TextChanged(object sender, EventArgs e)
@@ -50,6 +58,7 @@ namespace NoteAppUI
 
         private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ComboBoxCategory.BackColor = Color.White;
             _note.Category = (NoteCategory)ComboBoxCategory.SelectedIndex;
             _note.Updated = DateTime.Now;
         }
