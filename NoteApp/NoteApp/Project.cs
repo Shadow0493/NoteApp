@@ -20,10 +20,6 @@ namespace NoteApp
         /// Конструктор для списка заметок
         /// </summary>
         /// <param name="projects"></param>
-        public Project(List<Note> projects)
-        {
-            Projects = projects;
-        }
         public override string ToString()
         {
             return $"{Projects.First().ToString()}; {Projects.Last().ToString()}";

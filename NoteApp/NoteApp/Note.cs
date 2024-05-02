@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    public class Note : ICloneable, INotifyPropertyChanged
+    public class Note : ICloneable
     {
         /// <summary>
         /// поле название заметки
         /// </summary>
-        private string _title = "Без названия";
+        private string _title;
         /// <summary>
         /// поле категория заметки
         /// </summary>
@@ -33,12 +33,15 @@ namespace NoteApp
         /// <summary>
         /// сеттер и геттер для названия заметки
         /// </summary>
-        public string Title { get => _title; set 
-            { if (value.Length <= 50 && value.Length > 0) 
+        public string Title
+        {
+            get => _title; set
+            {
+                if (value.Length <= 50 && value.Length > 0)
                 { _title = value; }
-            else if (value.Length > 50) { throw new ArgumentException("Название не должно превышать 50 символов, а сейчас " + value); }
-            else if (value.Length == 0) { throw new ArgumentException("Количество символов не должно равнятся 0"); }
-            } 
+                else if (value.Length > 50) { throw new ArgumentException("Название не должно превышать 50 символов, а сейчас " + value); }
+                else if (value.Length == 0) { _title = "Без названия"; }
+            }
         }
         /// <summary>
         /// сеттер и геттер для категории заметки
@@ -55,13 +58,7 @@ namespace NoteApp
         /// <summary>
         /// сеттер и геттер для времени последнего обновления
         /// </summary>
-        public DateTime Updated { get => _updated; set 
-            { _updated = DateTime.Now;
-                OnPropertyChanged("Title");
-                OnPropertyChanged("Category");
-                OnPropertyChanged("Text");
-            } 
-        }
+        public DateTime Updated { get => _updated; set => _updated = value;}
         /// <summary>
         /// Конструктор объекта заметки
         /// </summary>
@@ -85,15 +82,6 @@ namespace NoteApp
         public object Clone()
         {
             return MemberwiseClone();
-        }
-        /// <summary>
-        /// Реализация INotifiedPropertyChanged, для автоматического обновления времени изменения
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
         public override string ToString()
         {
