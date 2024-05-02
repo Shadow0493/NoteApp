@@ -21,6 +21,7 @@ namespace NoteAppUI
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            ComboBoxCategory.SelectedIndex = 0;
             _project = ProjectManager.LoadFromFile();
 
             for (int i = 0; i < _project.Projects.Count(); i++)

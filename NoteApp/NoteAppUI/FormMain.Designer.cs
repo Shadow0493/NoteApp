@@ -243,7 +243,6 @@
             this.ComboBoxCategory.Name = "ComboBoxCategory";
             this.ComboBoxCategory.Size = new System.Drawing.Size(121, 28);
             this.ComboBoxCategory.TabIndex = 1;
-            this.ComboBoxCategory.Text = "All";
             // 
             // LabelCategoryChoose
             // 
