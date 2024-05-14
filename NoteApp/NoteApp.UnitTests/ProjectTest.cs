@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace NoteApp.UnitTests
 {
+    [TestFixture]
     public class ProjectTest
     {
         [Test(Description = "Геттер должен передать правильное значение Project")]
-        public void TestCategoryGet_PositiveUpdated()
+        public void TestCategoryGet_Positive()
         {
             var example_note1 = new Note("1", NoteCategory.Work, "");
             var example_note2 = new Note("2", NoteCategory.Home, "a");
@@ -24,7 +25,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test(Description = "Сеттер должен присвоить правильное значение Project")]
-        public void TestCategorySet_CorrectUpdated()
+        public void TestCategorySet_Correct()
         {
             var example_note1 = new Note("1", NoteCategory.Work, "");
             var example_note2 = new Note("2", NoteCategory.Home, "a");
