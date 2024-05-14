@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    public static class ProjectManager
+    public static class ProjectManager //цикл. сложность = 3
     {
         /// <summary>
         /// Константа для хранения пути для сохранения и загрузки файла
@@ -17,7 +17,7 @@ namespace NoteApp
         /// <summary>
         /// Геттер для пути к файлу
         /// </summary>
-        public static string Filename
+        public static string Filename //цикл. сложность = 1
         {
             get { return _filename; }
         }
@@ -26,7 +26,7 @@ namespace NoteApp
        /// </summary>
        /// <param name="list"></param>
        /// <param name="filename"></param>
-        public static void SaveToFile(Project list) 
+        public static void SaveToFile(Project list) //цикл. сложность = 1
         {
             JsonSerializer serializer = new JsonSerializer();
             using (StreamWriter sw = new StreamWriter(Filename))
@@ -40,7 +40,7 @@ namespace NoteApp
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public static Project LoadFromFile()
+        public static Project LoadFromFile() //цикл. сложность = 1
         {
             Project list = null;
             JsonSerializer serializer = new JsonSerializer();

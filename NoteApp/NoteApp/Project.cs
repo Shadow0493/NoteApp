@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    public class Project
+    public class Project //цикл. сложность = 2
     {
         /// <summary>
         /// Список заметок
@@ -15,14 +15,6 @@ namespace NoteApp
         /// <summary>
         /// Сеттер и геттер для списка заметок
         /// </summary>
-        public List<Note> Projects { get => _projects; set => _projects = value; }
-        /// <summary>
-        /// Конструктор для списка заметок
-        /// </summary>
-        /// <param name="projects"></param>
-        public override string ToString()
-        {
-            return $"{Projects.First().ToString()}; {Projects.Last().ToString()}";
-        }
+        public List<Note> Projects { get => _projects; set => _projects = value; } //цикл. сложность = 2
     }
 }
