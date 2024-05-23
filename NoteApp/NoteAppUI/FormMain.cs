@@ -21,13 +21,11 @@ namespace NoteAppUI
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            ComboBoxCategory.SelectedIndex = 0;
             _project = ProjectManager.LoadFromFile();
-
-            for (int i = 0; i < _project.Projects.Count(); i++)
-            {
-                ListBoxNotes.Items.Add(_project.Projects[i].Title);
-            }
+            _project.Projects = _project.Sort();
+            notes = _project.Projects;
+            ComboBoxCategory.SelectedIndex = 0;
+            ListBoxNotes.SelectedIndex = _project.CurrentNote;
         }
         private void AddNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -36,10 +34,10 @@ namespace NoteAppUI
 
             if (FormAddEdit.DialogResult == DialogResult.OK)
             {
-                var updatedNote = FormAddEdit.Note;
+                var createdNote = FormAddEdit.Note;
 
-                notes.Add(updatedNote);
-                var title = updatedNote.Title;
+                notes.Add(createdNote);
+                var title = createdNote.Title;
                 ListBoxNotes.Items.Add(title);
             }
             else
@@ -66,9 +64,10 @@ namespace NoteAppUI
                 var updatedNote = FormAddEdit.Note;
                 ListBoxNotes.Items.RemoveAt(selectedIndex);
                 notes.RemoveAt(selectedIndex);
-                notes.Insert(selectedIndex, updatedNote);
+                notes.Add(updatedNote);
                 var title = updatedNote.Title;
-                ListBoxNotes.Items.Insert(selectedIndex, title);
+                ListBoxNotes.Items.Add(title);
+
             }
             else
             {
@@ -79,19 +78,28 @@ namespace NoteAppUI
         private void RemoveNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var selectedIndex = ListBoxNotes.SelectedIndex;
-            notes.RemoveAt(selectedIndex);
-            ListBoxNotes.Items.RemoveAt(selectedIndex);
+            if(selectedIndex != -1)
+            {
+                notes.RemoveAt(selectedIndex);
+                ListBoxNotes.Items.RemoveAt(selectedIndex);
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _project.Projects = notes;
+            _project.CurrentNote = ListBoxNotes.SelectedIndex;
             ProjectManager.SaveToFile(_project);
         }
 
         private void ListBoxNotes_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedIndex = ListBoxNotes.SelectedIndex;
+            _project.CurrentNote = selectedIndex;
             if (selectedIndex != -1)
             {
                 LabelTitle.Text = notes[selectedIndex].Title;
@@ -102,11 +110,76 @@ namespace NoteAppUI
             }
             else
             {
-                LabelTitle.Text = "";
+                LabelTitle.Text = "Не выбрано";
                 LabelCategory.Text = "";
                 DateTimePickerCreated.Value = DateTime.Now;
                 DateTimePickerModified.Value = DateTime.Now;
                 TextBoxText.Text = "";
+            }
+        }
+
+        private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedIndex = ComboBoxCategory.SelectedIndex;
+           Project _notesCategory = new Project();
+            ListBoxNotes.Items.Clear();
+            switch (selectedIndex)
+            {
+                case 0:
+                    for (int i = 0; i < _project.Projects.Count(); i++)
+                    {
+                        ListBoxNotes.Items.Add(_project.Projects[i].Title);
+                    }
+                    break;
+                case 1:
+                    _notesCategory.Projects = _project.Sort(NoteCategory.Work);
+                    for (int i = 0; i < _notesCategory.Projects.Count(); i++)
+                    {
+                        ListBoxNotes.Items.Add(_notesCategory.Projects[i].Title);
+                    }
+                    break;
+                case 2:
+                    _notesCategory.Projects = _project.Sort(NoteCategory.Home);
+                    for (int i = 0; i < _notesCategory.Projects.Count(); i++)
+                    {
+                        ListBoxNotes.Items.Add(_notesCategory.Projects[i].Title);
+                    }
+                    break;
+                case 3:
+                    _notesCategory.Projects = _project.Sort(NoteCategory.HealthAndSport);
+                    for (int i = 0; i < _notesCategory.Projects.Count(); i++)
+                    {
+                        ListBoxNotes.Items.Add(_notesCategory.Projects[i].Title);
+                    }
+                    break;
+                case 4:
+                    _notesCategory.Projects = _project.Sort(NoteCategory.People);
+                    for (int i = 0; i < _notesCategory.Projects.Count(); i++)
+                    {
+                        ListBoxNotes.Items.Add(_notesCategory.Projects[i].Title);
+                    }
+                    break;
+                case 5:
+                    _notesCategory.Projects = _project.Sort(NoteCategory.Documents);
+                    for (int i = 0; i < _notesCategory.Projects.Count(); i++)
+                    {
+                        ListBoxNotes.Items.Add(_notesCategory.Projects[i].Title);
+                    }
+                    break;
+                case 6:
+                    _notesCategory.Projects = _project.Sort(NoteCategory.Finance);
+                    for (int i = 0; i < _notesCategory.Projects.Count(); i++)
+                    {
+                        ListBoxNotes.Items.Add(_notesCategory.Projects[i].Title);
+                    }
+                    break;
+                case 7:
+                    _notesCategory.Projects = _project.Sort(NoteCategory.Various);
+                    for (int i = 0; i < _notesCategory.Projects.Count(); i++)
+                    {
+                        ListBoxNotes.Items.Add(_notesCategory.Projects[i].Title);
+                    }
+                    break;
             }
         }
     }
