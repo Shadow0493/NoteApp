@@ -36,9 +36,9 @@ namespace NoteAppUI
             {
                 var createdNote = FormAddEdit.Note;
 
-                notes.Add(createdNote);
+                notes.Insert(0, createdNote);
                 var title = createdNote.Title;
-                ListBoxNotes.Items.Add(title);
+                ListBoxNotes.Items.Insert(0, title);
             }
             else
             {
@@ -64,9 +64,9 @@ namespace NoteAppUI
                 var updatedNote = FormAddEdit.Note;
                 ListBoxNotes.Items.RemoveAt(selectedIndex);
                 notes.RemoveAt(selectedIndex);
-                notes.Add(updatedNote);
+                notes.Insert(0, updatedNote);
                 var title = updatedNote.Title;
-                ListBoxNotes.Items.Add(title);
+                ListBoxNotes.Items.Insert(0,title);
 
             }
             else
